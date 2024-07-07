@@ -1,11 +1,5 @@
-import {
-  View,
-  Text,
-  FlatList,
-  ListRenderItemInfo,
-  ScrollView,
-} from "react-native";
-import React, { useState } from "react";
+import { View, ScrollView } from "react-native";
+import React from "react";
 import CategoryCard from "./CategoryCard";
 import { ImageSourcePropType } from "react-native";
 
@@ -17,13 +11,15 @@ interface Category {
 
 interface CategoryListProps {
   categories: Category[];
+  onSelect: (categoryId: string) => void;
 }
 
-const CategoryList: React.FC<{ categories: Category[] }> = ({ categories }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
-  const handleSelectCategory = (categoryId: string) => {
-    setSelectedCategory(categoryId === selectedCategory ? null : categoryId);
+const CategoryList: React.FC<CategoryListProps> = ({
+  categories,
+  onSelect,
+}) => {
+  const handleSelectCategory = (categoryTitle: string) => {
+    onSelect(categoryTitle);
   };
 
   return (
@@ -34,8 +30,7 @@ const CategoryList: React.FC<{ categories: Category[] }> = ({ categories }) => {
             key={category.id}
             title={category.title}
             icon={category.icon}
-            selected={category.id === selectedCategory}
-            onSelect={() => handleSelectCategory(category.id)}
+            onSelect={() => handleSelectCategory(category.title)}
           />
         ))}
       </View>
