@@ -1,11 +1,15 @@
 import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
+import CategoryList from "../../components/CategoryList";
+import categories from "../../constants/categories";
 
 const HomeScreen = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>Home</Text>
-    </View>
+      <CategoryList categories={categories} />
+    </SafeAreaView>
   );
 };
 

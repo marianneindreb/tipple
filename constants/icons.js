@@ -1,6 +1,3 @@
-import bookmark from "../assets/icons/bookmark.png";
-import home from "../assets/icons/home.png";
-import search from "../assets/icons/search.png";
 import popular from "../assets/icons/popular_2.png";
 import cocktail from "../assets/icons/cocktail_2.png";
 import shaker from "../assets/icons/shaker_2.png";
@@ -11,9 +8,6 @@ import punch from "../assets/icons/punch_2.png";
 import softDrink from "../assets/icons/soft_2.png";
 
 const icons = {
-  bookmark,
-  home,
-  search,
   popular,
   cocktail,
   shaker,
