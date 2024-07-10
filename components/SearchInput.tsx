@@ -1,26 +1,37 @@
 import { View, TextInput, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useRef } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 interface SearchInputProps {
   value: string;
-  handleChangeText: (text: string) => void;
+  onSearchPress: () => void;
+  setSearchText: (text: string) => void;
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({
   value,
-  handleChangeText,
+  onSearchPress,
+  setSearchText,
 }) => {
+  const inputRef = useRef<string>(value);
+
+  const handleBlur = () => {
+    setSearchText(inputRef.current);
+  };
+
   return (
     <View className="bg-white w-full h-14 px-4 text-black rounded-2xl items-center flex-row">
       <TextInput
         className="flex-1 text-black text-base"
-        value={value}
+        defaultValue={value}
         placeholder="Search for a drink..."
         placeholderTextColor={"#A0A3BD"}
-        onChangeText={handleChangeText}
+        autoCapitalize="none"
+        autoCorrect={false}
+        onChangeText={(text) => (inputRef.current = text)}
+        onBlur={handleBlur}
       />
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onSearchPress}>
         <Ionicons name="search" size={24} color="#A0A3BD" />
       </TouchableOpacity>
     </View>

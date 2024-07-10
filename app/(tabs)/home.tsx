@@ -1,48 +1,84 @@
-import React, { useState } from "react";
-import { Text, View, FlatList } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, FlatList, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CategoryList from "../../components/CategoryList";
 import SearchInput from "../../components/SearchInput";
-import categories from "../../constants/categories";
+import CategoryList from "../../components/CategoryList";
+import { fetchSearchedDrinks } from "../../networking/cocktailApi";
+import { Drink } from "../../models/Drink";
+import DrinkCard from "../../components/DrinkCard";
+import categories from "@/constants/categories";
 
 const HomeScreen: React.FC = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [selectedCategory, setSelectedCategory] =
     useState<string>("All Drinks");
+  const [drinks, setDrinks] = useState<Drink[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const searchDrink = (text: string) => {
-    // TODO: Implement search logic based on the search text
-    setSearchText(text);
-    // const filteredCategories = categories.filter(category =>
-    //   category.title.toLowerCase().includes(text.toLowerCase())
-    // );
+  useEffect(() => {
+    const fetchInitialDrinks = async () => {
+      setLoading(true);
+      try {
+        const initialDrinks = await fetchSearchedDrinks("");
+        setDrinks(initialDrinks);
+      } catch (error) {
+        console.error("Error fetching drinks:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInitialDrinks();
+  }, []);
+
+  const searchDrink = async () => {
+    setLoading(true);
+    try {
+      const searchedDrinks = await fetchSearchedDrinks(searchText);
+      setDrinks(searchedDrinks);
+      console.log(searchText);
+    } catch (error) {
+      console.error("Error fetching drinks:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleCategorySelect = (categoryTitle: string) => {
-    setSelectedCategory(categoryTitle);
-  };
+  const renderDrinkItem = ({ item }: { item: Drink }) => (
+    <View>
+      <DrinkCard drink={item} />
+    </View>
+  );
 
   return (
     <SafeAreaView>
       <FlatList
-        data={[{ id: "1" }, { id: "2" }, { id: "3" }]}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Text className="text-3xl">{item.id}</Text>}
+        data={drinks}
+        renderItem={renderDrinkItem}
+        keyExtractor={(item) => item.idDrink.toString()}
+        numColumns={2}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
             <View className="justify-between items-start flex-row mb-6">
-              <Text className="text-2xl font-bold">What's your tipple?</Text>
+              <View>
+                <Text className="text-2xl font-bold">What's your tipple?</Text>
+              </View>
             </View>
-            <SearchInput value={searchText} handleChangeText={searchDrink} />
-            <View className="flex-1">
-              <CategoryList
-                categories={categories}
-                onSelect={handleCategorySelect}
-              />
-            </View>
+            <SearchInput
+              value={searchText}
+              onSearchPress={searchDrink}
+              setSearchText={setSearchText}
+            />
+            <CategoryList
+              categories={categories}
+              onSelect={setSelectedCategory}
+            />
             <Text className="text-base font-bold">{selectedCategory}</Text>
           </View>
         )}
+        ListFooterComponent={() =>
+          loading && <ActivityIndicator size="small" color="#000000" />
+        }
       />
     </SafeAreaView>
   );
