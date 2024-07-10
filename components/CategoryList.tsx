@@ -24,7 +24,7 @@ const CategoryList: React.FC<CategoryListProps> = ({
 
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-      <View className="flex-row">
+      <View className="flex-row pt-4">
         {categories.map((category) => (
           <CategoryCard
             key={category.id}

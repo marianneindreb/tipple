@@ -28,7 +28,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
   return (
     <TouchableOpacity className="items-center mx-2" onPress={handlePress}>
       <View
-        className={`border rounded-full p-3 items-center justify-center w-14 h-14 ${
+        className={`border rounded-full items-center justify-center w-14 h-14 ${
           selected ? "bg-secondary border-white border-2 shadow-md" : ""
         }`}
       >
