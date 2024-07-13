@@ -71,13 +71,15 @@ const HomeScreen: React.FC = () => {
         keyExtractor={(item) => item.idDrink.toString()}
         numColumns={2}
         ListHeaderComponent={() => (
-          <View className="my-6 px-4 space-y-6">
-            <View className="justify-between items-start flex-row mb-6">
+          <View className="px-4 space-y-6">
+            <View className="justify-between items-start flex-row">
               <View>
-                <Text className="text-2xl font-bold">What's your tipple?</Text>
+                <Text className="text-2xl pt-8 font-bold">
+                  What's your tipple?
+                </Text>
               </View>
             </View>
-            <View className="bg-white w-full h-14 px-4 text-black rounded-2xl items-center flex-row">
+            <View className="bg-white w-full h-14 px-4 shadow-xs rounded-2xl items-center flex-row">
               <TextInput
                 className="flex-1 text-black text-base"
                 value={searchText}

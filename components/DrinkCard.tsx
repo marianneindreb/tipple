@@ -8,13 +8,15 @@ interface DrinkCardProps {
 
 const DrinkCard: React.FC<DrinkCardProps> = ({ drink }) => {
   return (
-    <TouchableOpacity className="bg-white w-44 h-60 rounded-lg m-2 shadow-md p-2">
+    <TouchableOpacity className="bg-white w-44 h-54 rounded-lg m-2 shadow-xs p-2">
       <Image
         source={{ uri: drink.strDrinkThumb }}
         className="w-40 h-44 rounded-lg"
       />
-      <View className="mt-2">
-        <Text className="text-sm font-bold">{drink.strDrink}</Text>
+      <View className="mt-3">
+        <Text className="text-sm font-bold" numberOfLines={1}>
+          {drink.strDrink}
+        </Text>
       </View>
     </TouchableOpacity>
   );
