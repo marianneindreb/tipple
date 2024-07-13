@@ -15,11 +15,11 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
 }) => (
   <TouchableOpacity className="items-center mx-2" onPress={onSelect}>
     <View
-      className={`border rounded-full items-center justify-center w-14 h-14 ${
-        isSelected ? "bg-secondary border-white border-2 shadow-md" : ""
+      className={`border-white border-2 rounded-full items-center justify-center w-14 h-14 ${
+        isSelected ? "bg-white border-white shadow-xs" : ""
       }`}
     >
-      <Image source={category.icon} className="w-7 h-7 tint-black" />
+      <Image source={category.icon} className="w-7 h-7" />
     </View>
     <Text className="mt-2 text-xs text-black">{category.title}</Text>
   </TouchableOpacity>
