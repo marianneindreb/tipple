@@ -1,18 +1,29 @@
 import { icons } from "./icons";
 import { ImageSourcePropType } from "react-native";
 
-const categories: {
+export type CategoryTitle =
+  | "All drinks"
+  | "Cocktails"
+  | "Shakes"
+  | "Shots"
+  | "Drinks"
+  | "Liqours"
+  | "Punch";
+
+export interface Category {
   id: string;
-  title: string;
+  title: CategoryTitle;
   icon: ImageSourcePropType;
-}[] = [
+}
+
+const categories: Category[] = [
+  { id: "1", title: "All drinks", icon: icons.allDrinks },
   { id: "2", title: "Cocktails", icon: icons.cocktail },
-  { id: "3", title: "Shaken", icon: icons.shaker },
+  { id: "3", title: "Shakes", icon: icons.shake },
   { id: "4", title: "Shots", icon: icons.shot },
   { id: "5", title: "Drinks", icon: icons.drink },
   { id: "6", title: "Liqours", icon: icons.liqour },
   { id: "7", title: "Punch", icon: icons.punch },
-  { id: "8", title: "Soft Drinks", icon: icons.softDrink },
 ];
 
 export default categories;

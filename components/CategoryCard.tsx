@@ -1,42 +1,28 @@
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ImageSourcePropType,
-} from "react-native";
-import React, { useState } from "react";
+import { View, Text, Image, TouchableOpacity } from "react-native";
+import React from "react";
+import { Category } from "@/constants/categories";
 
 interface CategoryCardProps {
-  title: string;
-  icon: ImageSourcePropType;
+  category: Category;
   onSelect: () => void;
+  isSelected: boolean;
 }
 
 const CategoryCard: React.FC<CategoryCardProps> = ({
-  title,
-  icon,
+  category,
   onSelect,
-}) => {
-  const [selected, setSelected] = useState<boolean>(false);
-
-  const handlePress = () => {
-    setSelected(!selected);
-    onSelect();
-  };
-
-  return (
-    <TouchableOpacity className="items-center mx-2" onPress={handlePress}>
-      <View
-        className={`border rounded-full items-center justify-center w-14 h-14 ${
-          selected ? "bg-secondary border-white border-2 shadow-md" : ""
-        }`}
-      >
-        <Image source={icon} className="w-7 h-7 tint-black" />
-      </View>
-      <Text className="mt-2 text-xs text-black">{title}</Text>
-    </TouchableOpacity>
-  );
-};
+  isSelected,
+}) => (
+  <TouchableOpacity className="items-center mx-2" onPress={onSelect}>
+    <View
+      className={`border rounded-full items-center justify-center w-14 h-14 ${
+        isSelected ? "bg-secondary border-white border-2 shadow-md" : ""
+      }`}
+    >
+      <Image source={category.icon} className="w-7 h-7 tint-black" />
+    </View>
+    <Text className="mt-2 text-xs text-black">{category.title}</Text>
+  </TouchableOpacity>
+);
 
 export default CategoryCard;
