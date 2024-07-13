@@ -1,41 +1,29 @@
 import { View, ScrollView } from "react-native";
 import React from "react";
 import CategoryCard from "./CategoryCard";
-import { ImageSourcePropType } from "react-native";
-
-interface Category {
-  id: string;
-  title: string;
-  icon: ImageSourcePropType;
-}
+import categories, { Category } from "@/constants/categories";
 
 interface CategoryListProps {
-  categories: Category[];
-  onSelect: (categoryId: string) => void;
+  onSelect: (category: Category) => void;
+  selectedCategoryId: string;
 }
 
 const CategoryList: React.FC<CategoryListProps> = ({
-  categories,
   onSelect,
-}) => {
-  const handleSelectCategory = (categoryTitle: string) => {
-    onSelect(categoryTitle);
-  };
-
-  return (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-      <View className="flex-row pt-4">
-        {categories.map((category) => (
-          <CategoryCard
-            key={category.id}
-            title={category.title}
-            icon={category.icon}
-            onSelect={() => handleSelectCategory(category.title)}
-          />
-        ))}
-      </View>
-    </ScrollView>
-  );
-};
+  selectedCategoryId,
+}) => (
+  <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+    <View className="flex-row pt-4">
+      {categories.map((category) => (
+        <CategoryCard
+          category={category}
+          key={category.id}
+          isSelected={category.id === selectedCategoryId}
+          onSelect={() => onSelect(category)}
+        />
+      ))}
+    </View>
+  </ScrollView>
+);
 
 export default CategoryList;
