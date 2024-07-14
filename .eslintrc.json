@@ -1,12 +1,20 @@
 {
+  "parser": "@typescript-eslint/parser",
   "extends": [
     "expo",
     "plugin:@typescript-eslint/recommended",
     "eslint-config-prettier"
   ],
-  "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "plugins": ["expo", "@typescript-eslint"],
   "rules": {
-    "@typescript-eslint/no-explicit-any": "warn",
-    "@typescript-eslint/explicit-module-boundary-types": "error"
-  }
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "error",
+    "@typescript-eslint/no-unsafe-return": "error"
+  },
+  "ignorePatterns": ["babel.config.js", "tailwind.config.js"]
 }

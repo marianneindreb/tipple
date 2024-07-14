@@ -4,7 +4,7 @@ import React from "react";
 import FormField from "@/components/FormField";
 import { router } from "expo-router";
 
-const Login = () => {
+const Login: React.FC = () => {
   return (
     <ImageBackground
       source={images.welcomeBackground}

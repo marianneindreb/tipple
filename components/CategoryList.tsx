@@ -4,7 +4,7 @@ import CategoryCard from "./CategoryCard";
 import categories, { Category } from "@/constants/categories";
 
 interface CategoryListProps {
-  onSelect: (category: Category) => void;
+  onSelect: (category: Category) => Promise<void>;
   selectedCategoryId: string;
 }
 

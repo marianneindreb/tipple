@@ -1,9 +1,18 @@
+import { CategoryTitle } from "@/constants/categories";
+import { CategoryMap, Drink } from "./types";
+
 const BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1";
 
-export const fetchSearchedDrinks = async (searchText: string) => {
+interface DrinkResponse {
+  drinks: Drink[];
+}
+
+export const fetchDrinksByQuery = async (
+  searchText: string
+): Promise<Drink[]> => {
   try {
     const response = await fetch(`${BASE_URL}/search.php?s=${searchText}`);
-    const data = await response.json();
+    const data: DrinkResponse = await response.json();
     return data.drinks;
   } catch (error) {
     console.error("Error fetching searched drinks: ", error);
@@ -11,12 +20,7 @@ export const fetchSearchedDrinks = async (searchText: string) => {
   }
 };
 
-interface CategoryMap {
-  [key: string]: string;
-}
-
-const categoryMap: CategoryMap = {
-  "All drinks": "",
+const apiCategoriesMap: CategoryMap = {
   Cocktails: "Cocktail",
   Shakes: "Shake",
   Shots: "Shot",
@@ -25,15 +29,17 @@ const categoryMap: CategoryMap = {
   Punch: "Punch / Party Drink",
 };
 
-export const fetchDrinksByCategory = async (category: string) => {
+export const fetchDrinksByCategory = async (
+  category: Exclude<CategoryTitle, "All drinks">
+): Promise<Drink[]> => {
   try {
-    const apiCategory = categoryMap[category];
+    const apiCategory = apiCategoriesMap[category];
     let url = `${BASE_URL}/filter.php?c=${apiCategory}`;
     if (!apiCategory) {
       url = `${BASE_URL}/search.php?s=`;
     }
     const response = await fetch(url);
-    const data = await response.json();
+    const data: DrinkResponse = await response.json();
     return data.drinks;
   } catch (error) {
     console.error("Error fetching drinks by category: ", error);
@@ -41,13 +47,13 @@ export const fetchDrinksByCategory = async (category: string) => {
   }
 };
 
-export const fetchDrinkDetails = async (drinkId: string) => {
+export const fetchDrinkById = async (id: string): Promise<Drink> => {
   try {
-    const response = await fetch(`${BASE_URL}/lookup.php?i=${drinkId}`);
-    const data = await response.json();
+    const response = await fetch(`${BASE_URL}/lookup.php?i=${id}`);
+    const data: DrinkResponse = await response.json();
     return data.drinks[0];
   } catch (error) {
     console.error("Error fetching drink details: ", error);
-    return {};
+    return {} as Drink;
   }
 };

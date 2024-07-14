@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import { Drink } from "../models/Drink";
+import type { Drink } from "@/networking/types";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 interface DrinkCardProps {
   drink: Drink;
@@ -13,10 +14,11 @@ const DrinkCard: React.FC<DrinkCardProps> = ({ drink }) => {
         source={{ uri: drink.strDrinkThumb }}
         className="w-40 h-44 rounded-lg"
       />
-      <View className="mt-3">
-        <Text className="text-sm font-bold" numberOfLines={1}>
+      <View className="my-2 flex-row justify-between items-center">
+        <Text className="text-sm flex-1" numberOfLines={1}>
           {drink.strDrink}
         </Text>
+        <Ionicons name="chevron-forward" size={16} color="black" />
       </View>
     </TouchableOpacity>
   );

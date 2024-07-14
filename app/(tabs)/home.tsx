@@ -8,12 +8,12 @@ import {
 } from "react-native";
 import CategoryList from "../../components/CategoryList";
 import {
-  fetchSearchedDrinks,
+  fetchDrinksByQuery,
   fetchDrinksByCategory,
 } from "../../networking/cocktailApi";
-import { Drink } from "../../models/Drink";
+import type { Drink } from "@/networking/types";
 import DrinkCard from "../../components/DrinkCard";
-import categories, { Category, CategoryTitle } from "@/constants/categories";
+import categories, { Category } from "@/constants/categories";
 import SearchInput from "@/components/SearchInput";
 
 const HomeScreen: React.FC = () => {
@@ -25,35 +25,32 @@ const HomeScreen: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    searchDrink("", selectedCategory.title);
+    searchDrink("");
   }, []);
 
-  useEffect(() => {
-    if (!searchText) {
-      searchDrink("", selectedCategory.title);
-    }
-  }, [selectedCategory]);
-
-  const searchDrink = async (
-    query: string,
-    category: CategoryTitle = selectedCategory.title
-  ) => {
+  const searchDrink = async (query: string) => {
     setLoading(true);
     try {
-      let fetchedDrinks;
-      if (query) {
-        fetchedDrinks = await fetchSearchedDrinks(query);
-      } else if (category && category !== "All drinks") {
-        fetchedDrinks = await fetchDrinksByCategory(category);
-      } else {
-        fetchedDrinks = await fetchSearchedDrinks("");
-      }
+      const fetchedDrinks = await fetchDrinksByQuery(query);
       setDrinks(fetchedDrinks);
     } catch (error) {
       console.error("Error fetching drinks:", error);
     } finally {
       setLoading(false);
       setSearchText("");
+    }
+  };
+
+  const onCategorySelect = async (category: Category) => {
+    setSelectedCategory(category);
+    if (category.title !== "All drinks") {
+      fetchDrinksByCategory(category.title).then((result) => {
+        setDrinks(result);
+      });
+    } else {
+      fetchDrinksByQuery("").then((result) => {
+        setDrinks(result);
+      });
     }
   };
 
@@ -87,7 +84,7 @@ const HomeScreen: React.FC = () => {
             />
 
             <CategoryList
-              onSelect={setSelectedCategory}
+              onSelect={onCategorySelect}
               selectedCategoryId={selectedCategory.id}
             />
             <Text className="text-base font-bold">
