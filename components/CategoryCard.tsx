@@ -4,7 +4,7 @@ import { Category } from "@/constants/categories";
 
 interface CategoryCardProps {
   category: Category;
-  onSelect: () => void;
+  onSelect: () => Promise<void>;
   isSelected: boolean;
 }
 
@@ -25,4 +25,4 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
   </TouchableOpacity>
 );
 
-export default CategoryCard;
+export { CategoryCard };

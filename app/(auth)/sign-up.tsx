@@ -1,10 +1,10 @@
 import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import { images } from "../../constants/images";
 import React from "react";
-import FormField from "@/components/FormField";
+import { FormField } from "@/components/FormField";
 import { router } from "expo-router";
 
-const Signup = () => {
+const Signup: React.FC = () => {
   return (
     <ImageBackground
       source={images.welcomeBackground}
@@ -14,25 +14,25 @@ const Signup = () => {
       <View className="bg-background h-full mt-96 p-8 rounded-t-3xl shadow-2xl">
         <Text className="font-bold text-2xl">Sign up</Text>
         <FormField
-          label={"Username"}
-          placeholder={"Add your username"}
-          value={""}
+          label="Username"
+          placeholder="Add your username"
+          value=""
           handleChangeText={function (text: string): void {
             throw new Error("Function not implemented.");
           }}
         />
         <FormField
-          label={"Email"}
-          placeholder={"Add valid email address"}
-          value={""}
+          label="Email"
+          placeholder="Add valid email address"
+          value=""
           handleChangeText={function (text: string): void {
             throw new Error("Function not implemented.");
           }}
         />
         <FormField
-          label={"Password"}
-          placeholder={"Add a secure password"}
-          value={""}
+          label="Password"
+          placeholder="Add a secure password"
+          value=""
           handleChangeText={function (text: string): void {
             throw new Error("Function not implemented.");
           }}

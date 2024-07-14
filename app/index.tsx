@@ -1,9 +1,8 @@
-import { Redirect, router } from "expo-router";
+import { router } from "expo-router";
 import { images } from "../constants/images";
 import { View, ImageBackground, Text, TouchableOpacity } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
-export default function Index() {
+const Index: React.FC = () => {
   return (
     <View className="flex-1 ">
       <ImageBackground
@@ -13,8 +12,8 @@ export default function Index() {
       >
         <View className="p-8 relative z-10 space-y-4">
           <Text className="text-4xl font-bold text-white">tipple.</Text>
-          <Text className="text-2xl text-white">
-            Discover, create, and savor the perfect drink with tipple.
+          <Text className="text-3xl pb-8 text-white">
+            Discover, create, and savor your next drink with tipple.
           </Text>
           <TouchableOpacity
             className="align-middle bg-white p-2 rounded-md mt-4"
@@ -22,7 +21,7 @@ export default function Index() {
           >
             <Text className="text-center font-bold text-base">SIGN UP</Text>
           </TouchableOpacity>
-          <Text className="text-white text-center mt-4">
+          <Text className="text-white text-base text-center mt-4">
             Already have an account?
           </Text>
           <TouchableOpacity onPress={() => router.push("/home")}>
@@ -34,4 +33,6 @@ export default function Index() {
       </ImageBackground>
     </View>
   );
-}
+};
+
+export default Index;

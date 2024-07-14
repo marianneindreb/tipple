@@ -30,8 +30,8 @@ const TabIcon: React.FC<TabIconProps> = ({
 };
 
 const TabsLayout: React.FC = () => {
-  const focusedColor = "#E3A976";
-  const defaultColor = "#2E3141";
+  const focusedColor = "black";
+  const defaultColor = "#BABABA";
 
   return (
     <Tabs
@@ -39,8 +39,7 @@ const TabsLayout: React.FC = () => {
         tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: "#EFEFEF",
-          borderTopColor: "transparent",
-          height: 54,
+          height: 94,
         },
       }}
     >

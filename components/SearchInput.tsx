@@ -18,6 +18,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       <View className="flex-row items-center bg-white p-4 rounded-xl">
         <TextInput
           placeholder="Search for a drink"
+          defaultValue={value}
           value={value}
           onChangeText={handleChangeText}
           placeholderTextColor="#A0A3BD"
@@ -33,4 +34,4 @@ const SearchInput: React.FC<SearchInputProps> = ({
   );
 };
 
-export default SearchInput;
+export { SearchInput };

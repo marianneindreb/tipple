@@ -1,3 +1,5 @@
+import { CategoryTitle } from "@/constants/categories";
+
 export interface Drink {
   idDrink: string;
   strDrink: string;
@@ -38,3 +40,16 @@ export interface Drink {
   strMeasure15?: string;
   dateModified?: string;
 }
+
+export type ApiCategoryName =
+  | "Cocktail"
+  | "Shake"
+  | "Shot"
+  | "Ordinary Drink"
+  | "Homemade Liqueur"
+  | "Punch / Party Drink";
+
+export type CategoryMap = Record<
+  Exclude<CategoryTitle, "All drinks">,
+  ApiCategoryName
+>;
