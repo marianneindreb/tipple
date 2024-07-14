@@ -1,4 +1,4 @@
-import { Link } from "expo-router";
+import { Redirect, router } from "expo-router";
 import { images } from "../constants/images";
 import { View, ImageBackground, Text, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
@@ -16,21 +16,22 @@ export default function Index() {
           <Text className="text-2xl text-white">
             Discover, create, and savor the perfect drink with tipple.
           </Text>
-          <TouchableOpacity className="align-middle bg-white p-2 rounded-md mt-4">
+          <TouchableOpacity
+            className="align-middle bg-white p-2 rounded-md mt-4"
+            onPress={() => router.push("/(auth)/sign-up")}
+          >
             <Text className="text-center font-bold text-base">SIGN UP</Text>
           </TouchableOpacity>
           <Text className="text-white text-center mt-4">
             Already have an account?
           </Text>
-          <Link
-            className={" text-white font-bold text-center text-base"}
-            href={"./home"}
-          >
-            LOG IN
-          </Link>
+          <TouchableOpacity onPress={() => router.push("/home")}>
+            <Text className="text-center text-white font-bold text-base">
+              LOG IN
+            </Text>
+          </TouchableOpacity>
         </View>
       </ImageBackground>
-      <StatusBar style="light" />
     </View>
   );
 }
