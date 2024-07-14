@@ -1,14 +1,11 @@
-// HomeScreen.tsx
 import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
   FlatList,
   ActivityIndicator,
-  TextInput,
-  TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import CategoryList from "../../components/CategoryList";
 import {
   fetchSearchedDrinks,
@@ -17,7 +14,7 @@ import {
 import { Drink } from "../../models/Drink";
 import DrinkCard from "../../components/DrinkCard";
 import categories, { Category, CategoryTitle } from "@/constants/categories";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import SearchInput from "@/components/SearchInput";
 
 const HomeScreen: React.FC = () => {
   const [searchText, setSearchText] = useState<string>("");
@@ -32,7 +29,9 @@ const HomeScreen: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    searchDrink(searchText, selectedCategory.title);
+    if (!searchText) {
+      searchDrink("", selectedCategory.title);
+    }
   }, [selectedCategory]);
 
   const searchDrink = async (
@@ -54,6 +53,7 @@ const HomeScreen: React.FC = () => {
       console.error("Error fetching drinks:", error);
     } finally {
       setLoading(false);
+      setSearchText("");
     }
   };
 
@@ -79,20 +79,13 @@ const HomeScreen: React.FC = () => {
                 </Text>
               </View>
             </View>
-            <View className="bg-white w-full h-14 px-4 shadow-xs rounded-2xl items-center flex-row">
-              <TextInput
-                className="flex-1 text-black text-base"
-                value={searchText}
-                placeholder="Search for a drink..."
-                placeholderTextColor="#A0A3BD"
-                autoCapitalize="none"
-                autoCorrect={false}
-                onChangeText={setSearchText}
-              />
-              <TouchableOpacity onPress={() => searchDrink(searchText)}>
-                <Ionicons name="search" size={24} color="#A0A3BD" />
-              </TouchableOpacity>
-            </View>
+
+            <SearchInput
+              value={searchText}
+              handleChangeText={setSearchText}
+              onSearch={() => searchDrink(searchText)}
+            />
+
             <CategoryList
               onSelect={setSelectedCategory}
               selectedCategoryId={selectedCategory.id}
