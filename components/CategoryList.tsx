@@ -1,7 +1,7 @@
 import { View, ScrollView } from "react-native";
 import React from "react";
-import CategoryCard from "./CategoryCard";
-import categories, { Category } from "@/constants/categories";
+import { categories, Category } from "@/constants/categories";
+import { CategoryCard } from "./CategoryCard";
 
 interface CategoryListProps {
   onSelect: (category: Category) => Promise<void>;
@@ -26,4 +26,4 @@ const CategoryList: React.FC<CategoryListProps> = ({
   </ScrollView>
 );
 
-export default CategoryList;
+export { CategoryList };

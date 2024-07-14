@@ -25,4 +25,4 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
   </TouchableOpacity>
 );
 
-export default CategoryCard;
+export { CategoryCard };

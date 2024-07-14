@@ -1,7 +1,7 @@
 import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 import { images } from "../../constants/images";
 import React from "react";
-import FormField from "@/components/FormField";
+import { FormField } from "@/components/FormField";
 import { router } from "expo-router";
 
 const Signup: React.FC = () => {

@@ -6,15 +6,15 @@ import {
   ActivityIndicator,
   SafeAreaView,
 } from "react-native";
-import CategoryList from "../../components/CategoryList";
+import { CategoryList } from "../../components/CategoryList";
 import {
   fetchDrinksByQuery,
   fetchDrinksByCategory,
 } from "../../networking/cocktailApi";
 import type { Drink } from "@/networking/types";
-import DrinkCard from "../../components/DrinkCard";
-import categories, { Category } from "@/constants/categories";
-import SearchInput from "@/components/SearchInput";
+import { DrinkCard } from "../../components/DrinkCard";
+import { categories, Category } from "@/constants/categories";
+import { SearchInput } from "@/components/SearchInput";
 
 const HomeScreen: React.FC = () => {
   const [searchText, setSearchText] = useState<string>("");

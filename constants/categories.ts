@@ -16,7 +16,7 @@ export interface Category {
   icon: ImageSourcePropType;
 }
 
-const categories: Category[] = [
+export const categories: Category[] = [
   { id: "1", title: "All drinks", icon: icons.allDrinks },
   { id: "2", title: "Cocktails", icon: icons.cocktail },
   { id: "3", title: "Shakes", icon: icons.shake },
@@ -25,5 +25,3 @@ const categories: Category[] = [
   { id: "6", title: "Liqours", icon: icons.liqour },
   { id: "7", title: "Punch", icon: icons.punch },
 ];
-
-export default categories;

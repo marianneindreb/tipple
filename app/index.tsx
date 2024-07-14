@@ -2,7 +2,7 @@ import { router } from "expo-router";
 import { images } from "../constants/images";
 import { View, ImageBackground, Text, TouchableOpacity } from "react-native";
 
-export const Index: React.FC = () => {
+const Index: React.FC = () => {
   return (
     <View className="flex-1 ">
       <ImageBackground
@@ -34,3 +34,5 @@ export const Index: React.FC = () => {
     </View>
   );
 };
+
+export default Index;

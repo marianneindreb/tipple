@@ -24,4 +24,4 @@ const DrinkCard: React.FC<DrinkCardProps> = ({ drink }) => {
   );
 };
 
-export default DrinkCard;
+export { DrinkCard };
