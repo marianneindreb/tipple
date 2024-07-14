@@ -1,6 +1,6 @@
 import { View, ScrollView } from "react-native";
 import React from "react";
-import { categories, Category } from "@/constants/categories";
+import { CATEGORIES, Category } from "@/constants/categories";
 import { CategoryCard } from "./CategoryCard";
 
 interface CategoryListProps {
@@ -14,7 +14,7 @@ const CategoryList: React.FC<CategoryListProps> = ({
 }) => (
   <ScrollView horizontal showsHorizontalScrollIndicator={false}>
     <View className="flex-row pt-4">
-      {categories.map((category) => (
+      {CATEGORIES.map((category) => (
         <CategoryCard
           category={category}
           key={category.id}

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import type { Drink } from "@/networking/types";
+import type { Drink } from "@/fetch/types";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 interface DrinkCardProps {

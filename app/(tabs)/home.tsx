@@ -10,16 +10,16 @@ import { CategoryList } from "../../components/CategoryList";
 import {
   fetchDrinksByQuery,
   fetchDrinksByCategory,
-} from "../../networking/cocktailApi";
-import type { Drink } from "@/networking/types";
+} from "../../fetch/cocktailApiClient";
+import type { Drink } from "@/fetch/types";
 import { DrinkCard } from "../../components/DrinkCard";
-import { categories, Category } from "@/constants/categories";
+import { CATEGORIES, Category } from "@/constants/categories";
 import { SearchInput } from "@/components/SearchInput";
 
 const HomeScreen: React.FC = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<Category>(
-    categories[0]
+    CATEGORIES[0]
   );
   const [drinks, setDrinks] = useState<Drink[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -76,13 +76,11 @@ const HomeScreen: React.FC = () => {
                 </Text>
               </View>
             </View>
-
             <SearchInput
               value={searchText}
               handleChangeText={setSearchText}
               onSearch={() => searchDrink(searchText)}
             />
-
             <CategoryList
               onSelect={onCategorySelect}
               selectedCategoryId={selectedCategory.id}

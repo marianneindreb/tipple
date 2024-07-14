@@ -16,7 +16,7 @@ export interface Category {
   icon: ImageSourcePropType;
 }
 
-export const categories: Category[] = [
+export const CATEGORIES: Category[] = [
   { id: "1", title: "All drinks", icon: icons.allDrinks },
   { id: "2", title: "Cocktails", icon: icons.cocktail },
   { id: "3", title: "Shakes", icon: icons.shake },

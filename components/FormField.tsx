@@ -31,7 +31,9 @@ const FormField: React.FC<FormFieldProps> = ({
           className="flex-1"
         />
         {secureTextEntry && (
-          <TouchableOpacity onPress={() => setIsSecureEntry(!isSecureEntry)}>
+          <TouchableOpacity
+            onPress={() => setIsSecureEntry((prevState) => !prevState)}
+          >
             <Ionicons
               name={isSecureEntry ? "eye-off" : "eye"}
               size={24}
