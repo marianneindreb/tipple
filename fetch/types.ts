@@ -38,7 +38,6 @@ export interface Drink {
   strMeasure13?: string;
   strMeasure14?: string;
   strMeasure15?: string;
-  dateModified?: string;
 }
 
 export type ApiCategoryName =
