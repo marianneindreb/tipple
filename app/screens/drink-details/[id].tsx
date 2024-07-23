@@ -44,23 +44,39 @@ const DrinkDetailScreen: React.FC = () => {
     }
   }
 
+  const instructions = drink.strInstructions
+    .split(".")
+    .filter((sentence) => sentence.trim() !== "");
+
+  const formattedInstructions = instructions.map((instruction, index) => (
+    <Text key={index} className="mb-2 text-base">
+      <Text className="font-bold text-base">{index + 1}. </Text>
+      {instruction.trim()}.
+    </Text>
+  ));
+
   return (
-    <ScrollView>
+    <ScrollView className="bg-white">
       <Image source={{ uri: drink.strDrinkThumb }} className="w-full h-96" />
       <View className="p-6">
-        <Text className="text-base font-bold">Glass</Text>
-        <Text className="pb-4">{drink.strGlass}</Text>
+        <Text className="text-lg font-bold">Glass</Text>
+        <Text className="pb-4 text-base">{drink.strGlass}</Text>
+        {ingredients.length > 0 && (
+          <>
+            <Text className="text-lg font-bold">Ingredients</Text>
+            <View className="pb-4">
+              {ingredients.map((ingredient, index) => (
+                <Text key={index} className="text-base">
+                  <Text className="font-bold text-xl">{`\u2022`} </Text>
+                  {measurements[index]} {ingredient}
+                </Text>
+              ))}
+            </View>
+          </>
+        )}
 
-        <Text className="text-base font-bold">Ingredients</Text>
-        <View className="pb-4">
-          {ingredients.map((ingredient, index) => (
-            <Text key={index} className="pb-2">
-              - {measurements[index]} {ingredient}
-            </Text>
-          ))}
-        </View>
-        <Text className="text-base font-bold">Instructions</Text>
-        <Text className="pb-4">{drink.strInstructions}</Text>
+        <Text className="text-lg font-bold">Instructions</Text>
+        <View>{formattedInstructions}</View>
       </View>
     </ScrollView>
   );

@@ -21,14 +21,14 @@ const ScreenLayout: React.FC = () => {
           // headerTransparent: true,
           headerLeft: () => (
             <TouchableOpacity onPress={() => router.back()}>
-              <Ionicons name="chevron-back" size={22} color="black" />
+              <Ionicons name="chevron-back" size={24} color="black" />
             </TouchableOpacity>
           ),
           headerRight: () => (
             <TouchableOpacity onPress={toggleFavorite}>
               <Ionicons
                 name={isFavorited ? "heart" : "heart-outline"}
-                size={22}
+                size={26}
                 color="black"
               />
             </TouchableOpacity>
