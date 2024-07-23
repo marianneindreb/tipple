@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image, ScrollView } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useNavigation } from "expo-router";
 import { Drink } from "@/fetch/types";
 import { fetchDrinkById } from "@/fetch/cocktailApiClient";
 
 const DrinkDetailScreen: React.FC = () => {
   const { id } = useLocalSearchParams();
   const [drink, setDrink] = useState<Drink | null>(null);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchDetails = async () => {
       const drinkDetails = await fetchDrinkById(id as string);
       setDrink(drinkDetails);
+
+      if (drinkDetails) {
+        navigation.setOptions({ title: drinkDetails.strDrink });
+      }
     };
     fetchDetails();
-  }, [id]);
+  }, [id, navigation]);
 
   if (!drink) {
     return (
@@ -41,8 +46,8 @@ const DrinkDetailScreen: React.FC = () => {
 
   return (
     <ScrollView>
-      <Image source={{ uri: drink.strDrinkThumb }} className="w-full h-80" />
-      <View className="p-4">
+      <Image source={{ uri: drink.strDrinkThumb }} className="w-full h-96" />
+      <View className="p-6">
         <Text className="text-base font-bold">Glass</Text>
         <Text className="pb-4">{drink.strGlass}</Text>
 
